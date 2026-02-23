@@ -15,7 +15,7 @@ These are slash commands that give Claude deep HCL Commerce knowledge — API pa
 From the root of your Next.js project:
 
 ```sh
-curl -s https://raw.githubusercontent.com/YOUR_ORG/hcl-commerce-skill/main/install.sh | sh
+curl -s https://raw.githubusercontent.com/hcl-team-dev-org/hcl-commerce-skill/main/install.sh | sh
 ```
 
 This copies the skill files into `.claude/commands/` in your project.
@@ -46,4 +46,4 @@ Each skill is a prompt file that Claude executes when you run the slash command.
 
 ## MCP server
 
-The MCP server that powers the live API calls during a session is at [hcl-commerce-mcp](https://github.com/YOUR_ORG/hcl-commerce-mcp). Configure it in your project via `.mcp.json`.
+The MCP server that powers the live API calls during a session is at [hcl-commerce-mcp](https://github.com/hcl-team-dev-org/hcl-commerce-mcp). Configure it in your project via `.mcp.json`.

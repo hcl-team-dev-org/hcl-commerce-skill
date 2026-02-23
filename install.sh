@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-REPO="YOUR_ORG/hcl-commerce-skill"
+REPO="hcl-team-dev-org/hcl-commerce-skill"
 BRANCH="main"
 BASE_URL="https://raw.githubusercontent.com/$REPO/$BRANCH/.claude/commands"
 
