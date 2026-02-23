@@ -6,11 +6,12 @@ Assume `/hcl-setup` has already been run. The foundation (`lib/commerce/client.t
 
 Before writing any code, use the MCP tools to inspect actual API responses from the connected environment:
 
-1. `get_categories` — identify available categories. Pick one that has products.
-2. `get_products_by_category` with that category's numeric ID — inspect the full response. The product list is in `catalogEntryView`. Note the fields available: `partNumber`, `name`, `thumbnail`, `shortDescription`, `seo`, `price`.
-3. `get_product_details` on 3–4 part numbers from step 2 — this reveals the full product structure including `items` (the child SKUs) and `attributes` (look for `usage: "Defining"` — these are variant axes like size, colour).
-4. `get_display_prices` on those part numbers — note the structure of list price vs offer price.
-5. `get_inventory` on the SKU `partNumber` values from the `items` in step 3 — confirm what inventory data looks like for this environment.
+1. `get_categories` — identify available top-level categories. In most HCL Commerce stores these are navigation categories only and contain no products directly — products live under subcategories.
+2. For the most relevant top-level category, call `get_subcategories` to find its children. If those subcategories also appear to be grouping categories, go one level deeper. Find a leaf-level category that actually contains products.
+3. `get_products_by_category` with that leaf category's numeric ID — inspect the full response. The product list is in `catalogEntryView`. Note the fields available: `partNumber`, `name`, `thumbnail`, `shortDescription`, `seo`, `price`.
+4. `get_product_details` on 3–4 part numbers from step 3 — this reveals the full product structure including `items` (the child SKUs) and `attributes` (look for `usage: "Defining"` — these are variant axes like size, colour).
+5. `get_display_prices` on those part numbers — note the structure of list price vs offer price.
+6. `get_inventory` on the SKU `partNumber` values from the `items` in step 4 — confirm what inventory data looks like for this environment.
 
 Use what you actually see in these responses to inform the code. Field names and shapes vary between Commerce+ and 9.x environments.
 

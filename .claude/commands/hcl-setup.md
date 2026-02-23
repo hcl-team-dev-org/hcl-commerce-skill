@@ -18,6 +18,7 @@ HCL_SEARCH_CONTEXT=/search/resources
 HCL_CURRENCY=USD
 HCL_COMMERCE_VERSION=commerce-plus  # or commerce-9x
 HCL_FULFILLMENT_CENTER=             # Commerce+ only, e.g. R00B2C
+NODE_TLS_REJECT_UNAUTHORIZED=0      # required for demo environments with self-signed certificates
 ```
 
 Add `.env.local` to `.gitignore` if not already there.
