@@ -8,7 +8,7 @@ Before writing any code, use the MCP tools to inspect actual API responses from 
 
 1. `get_categories` — identify available top-level categories. In most HCL Commerce stores these are navigation categories only and contain no products directly — products live under subcategories.
 2. For the most relevant top-level category, call `get_subcategories` to find its children. If those subcategories also appear to be grouping categories, go one level deeper. Find a leaf-level category that actually contains products.
-3. `get_products_by_category` with that leaf category's numeric ID — inspect the full response. The product list is in `catalogEntryView`. Note the fields available: `partNumber`, `name`, `thumbnail`, `shortDescription`, `seo`, `price`.
+3. `get_products_by_category` with that leaf category's numeric ID — inspect the full response. Note the fields available: `partNumber`, `name`, `thumbnail`, `shortDescription`, `seo`, `price`. **The array key differs by version**: `commerce-9x` returns products in `contents[]`; Commerce+ may return them in `catalogEntryView[]`. Check which key is actually present in the response and use that.
 4. `get_product_details` on 3–4 part numbers from step 3 — this reveals the full product structure including `items` (the child SKUs) and `attributes` (look for `usage: "Defining"` — these are variant axes like size, colour).
 5. `get_display_prices` on those part numbers — note the structure of list price vs offer price.
 6. `get_inventory` on the SKU `partNumber` values from the `items` in step 4 — confirm what inventory data looks like for this environment.
@@ -22,6 +22,7 @@ Use what you actually see in these responses to inform the code. Field names and
 **Batch sizes.** `get_product_details`, `get_display_prices`, and `get_inventory` all have URL length limits. Batch at 20 part numbers per request maximum.
 
 **Inventory version.** Check `HCL_COMMERCE_VERSION` in env:
+
 - `commerce-plus` → inventory endpoint is `/inventory/api/v1/item-inventories`, requires fulfillment center
 - `commerce-9x` → inventory endpoint is `/wcs/resources/store/{storeId}/inventoryavailability/byPartNumber`
 
@@ -34,7 +35,8 @@ Use what you actually see in these responses to inform the code. Field names and
 Create `lib/commerce/products.ts` with typed server-side functions. Keep fetch calls out of the page component itself. Use `cache: 'no-store'` for demo freshness — you want to see real data every time.
 
 The core call sequence for a PLP is:
-1. Fetch product list by category ID (search API, returns `catalogEntryView` with summary data)
+
+1. Fetch product list by category ID (search API, returns `contents[]` on 9.x or `catalogEntryView[]` on Commerce+ — use whichever key was present in step 3 above)
 2. Fetch full product details for the returned part numbers (transaction API, batched)
 3. Fetch display prices for those part numbers (transaction API, batched)
 4. Optionally fetch inventory for SKU part numbers from the product details
