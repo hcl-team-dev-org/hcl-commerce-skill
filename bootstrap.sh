@@ -31,8 +31,10 @@ prompt() {
   else
     printf "  %s: " "$_label"
   fi
-  read -r _input
-  [ -n "$_input" ] && eval "$_var=\"\$_input\""
+  read -r _input || true
+  if [ -n "$_input" ]; then
+    eval "$_var=\"\$_input\""
+  fi
 }
 
 echo ""
@@ -51,7 +53,8 @@ prompt HCL_CURRENCY           "Currency"
 
 # Validate required fields
 for _field in HCL_HOST_URL HCL_STORE_ID HCL_CATALOG_ID; do
-  if [ -z "$(eval echo "\$$_field")" ]; then
+  _val=$(eval echo "\$$_field")
+  if [ -z "$_val" ]; then
     echo "Error: $_field is required." >&2
     exit 1
   fi
