@@ -1,4 +1,4 @@
-You are setting up a Next.js App Router project to connect to an HCL Commerce backend. The MCP server for this session is already configured and pointing at a live HCL Commerce environment.
+A Next.js App Router project has already been scaffolded in this folder. Your job is to wire up the HCL Commerce integration layer on top of it. The MCP server is already configured and pointing at a live HCL Commerce environment.
 
 ## Verify the connection first
 
@@ -6,7 +6,7 @@ Call `get_categories` via the MCP tool. If it fails, stop and tell the user — 
 
 ## Environment variables
 
-Create `.env.local`. Use the values from the connected MCP environment — the user can confirm them if unsure:
+Create `.env.local`. Read the values from `.mcp.json` in the project root — they were written by the bootstrap script:
 
 ```env
 HCL_HOST_URL=                      # e.g. https://your-store.com:6443

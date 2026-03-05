@@ -38,7 +38,7 @@ This will:
 3. Scaffold a Next.js App Router project into the current folder
 4. Write `.mcp.json` and install the skill files
 
-Then open the folder in Claude Code and run `/hcl-setup`.
+Then open the folder in Claude Code and run `/hcl-setup`, then `/hcl-brief`.
 
 ## Skills
 
@@ -46,8 +46,8 @@ With Claude Code open in your project:
 
 **Available:**
 
-- **`/hcl-brief`** — run this first. Describe the prospect and what you're building; creates `STOREFRONT.md` that all subsequent skills use for design direction. Can be seeded inline: `/hcl-brief high-end fashion retailer, editorial, minimal`.
-- **`/hcl-setup`** — sets up the API client, session handling, and image helpers. Verifies the MCP connection before writing any code.
+- **`/hcl-setup`** — run this first. Sets up the API client, session handling, and image helpers. Verifies the MCP connection before writing any code.
+- **`/hcl-brief`** — run this second. Describe the prospect and what you're building; creates `STOREFRONT.md` that all subsequent skills use for design direction. Can be seeded inline: `/hcl-brief high-end fashion retailer, editorial, minimal`.
 - **`/hcl-plp`** — Product Listing Page. Queries the live API via MCP to inspect real data shapes before generating code.
 
 **Coming soon:**
