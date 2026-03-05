@@ -9,15 +9,15 @@ Call `get_categories` via the MCP tool. If it fails, stop and tell the user — 
 Create `.env.local`. Use the values from the connected MCP environment — the user can confirm them if unsure:
 
 ```env
-HCL_HOST_URL=https://commerce-preview.comdx.demo.com
-HCL_STORE_ID=41
-HCL_CATALOG_ID=3074457345616678718
-HCL_CONTRACT_ID=-41005
+HCL_HOST_URL=                      # e.g. https://your-store.com:6443
+HCL_STORE_ID=                      # numeric store ID
+HCL_CATALOG_ID=                    # numeric catalog ID
+HCL_CONTRACT_ID=                   # e.g. -41005
 HCL_TRANSACTION_CONTEXT=/wcs/resources
 HCL_SEARCH_CONTEXT=/search/resources
 HCL_CURRENCY=USD
-HCL_COMMERCE_VERSION=commerce-9x  # or commerce-plus
-HCL_FULFILLMENT_CENTER=R00B2C
+HCL_COMMERCE_VERSION=commerce-plus  # or commerce-9x
+HCL_FULFILLMENT_CENTER=             # Commerce+ only, e.g. R00B2C
 NODE_TLS_REJECT_UNAUTHORIZED=0      # required for demo environments with self-signed certificates
 ```
 
