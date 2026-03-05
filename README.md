@@ -23,17 +23,6 @@ gh auth login
 
 Choose **GitHub.com → HTTPS → Login with a web browser** and follow the prompts. You only need to do this once per machine.
 
-## One-time setup
-
-Download the defaults file and fill in your HCL Commerce environment values:
-
-```sh
-mkdir -p ~/.hcl-commerce
-gh api repos/hcl-team-dev-org/hcl-commerce-skill/contents/defaults.example -H "Accept: application/vnd.github.raw" > ~/.hcl-commerce/defaults
-```
-
-Then edit `~/.hcl-commerce/defaults` with your values. After that, bootstrap prompts will be pre-filled on every run.
-
 ## Quickstart
 
 Create an empty folder for your demo project and run from inside it:

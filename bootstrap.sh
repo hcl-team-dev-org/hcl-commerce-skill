@@ -13,6 +13,12 @@ fi
 
 # Set built-in defaults for values not yet saved
 : "${HCL_MCP_PATH:=$MCP_INSTALL_DIR/main/build/index.js}"
+: "${HCL_HOST_URL:=https://commerce-preview.comdx.demo.com}"
+: "${HCL_STORE_ID:=41}"
+: "${HCL_CATALOG_ID:=11501}"
+: "${HCL_CONTRACT_ID:=-41005}"
+: "${HCL_FULFILLMENT_CENTER:=R00B2C}"
+: "${HCL_STORE_NAME:=Ruby}"
 : "${HCL_COMMERCE_VERSION:=commerce-plus}"
 : "${HCL_CURRENCY:=USD}"
 
