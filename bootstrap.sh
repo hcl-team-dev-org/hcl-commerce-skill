@@ -2,7 +2,7 @@
 set -e
 
 DEFAULTS_FILE="$HOME/.hcl-commerce/defaults"
-SKILL_DIR="$(cd "$(dirname "$0")" && pwd)"
+SKILL_REPO="hcl-team-dev-org/hcl-commerce-skill"
 MCP_REPO="https://github.com/hcl-team-dev-org/hcl-commerce-mcp.git"
 MCP_INSTALL_DIR="$HOME/.hcl-commerce/mcp"
 
@@ -126,15 +126,20 @@ cat > .mcp.json << EOF
 }
 EOF
 
-# Install skills
+# Install skills from GitHub
 mkdir -p .claude/commands
 installed=0
-for file in "$SKILL_DIR/.claude/commands/"*.md; do
-  [ -f "$file" ] && cp "$file" .claude/commands/ && installed=$((installed + 1))
+SKILLS="hcl-brief hcl-setup hcl-plp hcl-pdp hcl-cart hcl-checkout hcl-search hcl-inventory hcl-categories"
+for skill in $SKILLS; do
+  if gh api "repos/$SKILL_REPO/contents/.claude/commands/$skill.md" -H "Accept: application/vnd.github.raw" > ".claude/commands/$skill.md" 2>/dev/null; then
+    installed=$((installed + 1))
+  else
+    rm -f ".claude/commands/$skill.md"
+  fi
 done
 
-# Copy CLAUDE.md template
-[ -f "$SKILL_DIR/templates/CLAUDE.md" ] && cp "$SKILL_DIR/templates/CLAUDE.md" CLAUDE.md
+# Fetch CLAUDE.md template from GitHub
+gh api "repos/$SKILL_REPO/contents/templates/CLAUDE.md" -H "Accept: application/vnd.github.raw" > CLAUDE.md 2>/dev/null || true
 
 echo ""
 echo "Done."
