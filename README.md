@@ -38,40 +38,25 @@ This will:
 
 Then open the project folder in Claude Code and run `/hcl-setup`.
 
-## Adding skills to an existing project
-
-From the root of an existing Next.js project:
-
-```sh
-gh api repos/hcl-team-dev-org/hcl-commerce-skill/contents/install.sh -H "Accept: application/vnd.github.raw" | sh
-```
-
-## Usage
+## Skills
 
 With Claude Code open in your project:
 
-1. **`/hcl-brief`** — run this first. Describes the prospect and what you're building, and creates a `STOREFRONT.md` brief that all subsequent skills read for design and creative direction. Can also be seeded directly: `/hcl-brief high-end fashion retailer, editorial, minimal`.
+**Available:**
 
-2. **`/hcl-setup`** — sets up the API client, session handling, image helpers, and environment variables. Verifies the MCP connection is working before writing any code.
+- **`/hcl-brief`** — run this first. Describe the prospect and what you're building; creates `STOREFRONT.md` that all subsequent skills use for design direction. Can be seeded inline: `/hcl-brief high-end fashion retailer, editorial, minimal`.
+- **`/hcl-setup`** — sets up the API client, session handling, and image helpers. Verifies the MCP connection before writing any code.
+- **`/hcl-plp`** — Product Listing Page. Queries the live API via MCP to inspect real data shapes before generating code.
 
-3. **`/hcl-plp`** — builds a Product Listing Page. Queries the live API via MCP to understand real data shapes before generating code.
+**Coming soon:**
 
-4. **`/hcl-pdp`** — product detail page with variant selection and inventory.
-
-5. **`/hcl-cart`** — cart context, sidebar, and cart page.
-
-6. **`/hcl-checkout`** — streamlined checkout flow (address → shipping → payment → submit).
-
-7. **`/hcl-search`** — search results page.
-
-8. **`/hcl-categories`** — category navigation component.
-
-9. **`/hcl-inventory`** — inventory display patterns (handles both Commerce+ and 9.x).
+- `/hcl-pdp` — product detail page with variant selection and inventory
+- `/hcl-cart` — cart context, sidebar, and cart page
+- `/hcl-checkout` — streamlined checkout flow
+- `/hcl-search` — search results page
+- `/hcl-categories` — category navigation
+- `/hcl-inventory` — inventory display patterns (Commerce+ and 9.x)
 
 ## How it works
 
-Each skill is a prompt file that Claude executes when you run the slash command. Before writing code, each skill instructs Claude to call the relevant MCP tools to inspect real API responses from the connected environment — so the code it produces is grounded in actual data, not assumptions.
-
-## MCP server
-
-The MCP server that powers the live API calls during a session is at [hcl-commerce-mcp](https://github.com/hcl-team-dev-org/hcl-commerce-mcp). Configure it in your project via `.mcp.json`.
+Each skill is a prompt file Claude executes when you run the slash command. Before writing code, each skill instructs Claude to call MCP tools to inspect real API responses from the connected environment — so the code it produces matches actual data shapes, not assumptions.
