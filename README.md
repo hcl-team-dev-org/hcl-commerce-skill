@@ -33,7 +33,7 @@ bash <(gh api repos/hcl-team-dev-org/hcl-commerce-skill/contents/bootstrap.sh -H
 ```
 
 This will:
-1. Prompt for your HCL Commerce environment config (saved as defaults for next time)
+1. Prompt for HCL Commerce environment config — all fields pre-filled with demo defaults, just hit Enter to accept
 2. Install the MCP server to `~/.hcl-commerce/mcp/` if not already present
 3. Scaffold a Next.js App Router project into the current folder
 4. Write `.mcp.json` and install the skill files
