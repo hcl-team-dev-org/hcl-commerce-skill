@@ -25,18 +25,20 @@ Choose **GitHub.com → HTTPS → Login with a web browser** and follow the prom
 
 ## Quickstart
 
+Create an empty folder for your demo project and run from inside it:
+
 ```sh
-gh api repos/hcl-team-dev-org/hcl-commerce-skill/contents/bootstrap.sh -H "Accept: application/vnd.github.raw" | sh
+mkdir my-demo && cd my-demo
+bash <(gh api repos/hcl-team-dev-org/hcl-commerce-skill/contents/bootstrap.sh -H "Accept: application/vnd.github.raw")
 ```
 
 This will:
-1. Prompt for a projects directory (default `~/demos`) and project name
-2. Prompt for your HCL Commerce environment config (saved as defaults for next time)
-3. Install the MCP server to `~/.hcl-commerce/mcp/` if not already present
-4. Scaffold a Next.js App Router project
-5. Write `.mcp.json` and install the skill files
+1. Prompt for your HCL Commerce environment config (saved as defaults for next time)
+2. Install the MCP server to `~/.hcl-commerce/mcp/` if not already present
+3. Scaffold a Next.js App Router project into the current folder
+4. Write `.mcp.json` and install the skill files
 
-Then open the project folder in Claude Code and run `/hcl-setup`.
+Then open the folder in Claude Code and run `/hcl-setup`.
 
 ## Skills
 

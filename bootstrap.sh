@@ -1,9 +1,6 @@
 #!/bin/sh
 set -e
 
-# Reconnect stdin to terminal so prompts work when script is piped via gh/curl
-exec < /dev/tty
-
 DEFAULTS_FILE="$HOME/.hcl-commerce/defaults"
 SKILL_DIR="$(cd "$(dirname "$0")" && pwd)"
 MCP_REPO="https://github.com/hcl-team-dev-org/hcl-commerce-mcp.git"
@@ -18,7 +15,6 @@ fi
 : "${HCL_MCP_PATH:=$MCP_INSTALL_DIR/main/build/index.js}"
 : "${HCL_COMMERCE_VERSION:=commerce-plus}"
 : "${HCL_CURRENCY:=USD}"
-: "${HCL_PROJECTS_DIR:=$HOME/demos}"
 
 prompt() {
   _var="$1"
@@ -36,18 +32,6 @@ prompt() {
 echo ""
 echo "HCL Commerce Demo Bootstrap"
 echo "==========================="
-echo ""
-
-prompt HCL_PROJECTS_DIR "Projects directory"
-printf "Project name: "
-read -r PROJECT_NAME
-if [ -z "$PROJECT_NAME" ]; then
-  echo "Error: project name is required." >&2
-  exit 1
-fi
-
-PROJECT_DIR="$HCL_PROJECTS_DIR/$PROJECT_NAME"
-
 echo ""
 echo "HCL Commerce environment:"
 prompt HCL_HOST_URL           "Host URL"
@@ -95,14 +79,12 @@ HCL_STORE_NAME='$HCL_STORE_NAME'
 HCL_COMMERCE_VERSION='$HCL_COMMERCE_VERSION'
 HCL_CURRENCY='$HCL_CURRENCY'
 HCL_MCP_PATH='$HCL_MCP_PATH'
-HCL_PROJECTS_DIR='$HCL_PROJECTS_DIR'
 EOF
 
-# Scaffold Next.js project
+# Scaffold Next.js project into current directory
 echo ""
 echo "Creating Next.js project..."
-mkdir -p "$HCL_PROJECTS_DIR"
-npx create-next-app@latest "$PROJECT_DIR" \
+npx create-next-app@latest . \
   --typescript \
   --app \
   --tailwind \
@@ -110,8 +92,6 @@ npx create-next-app@latest "$PROJECT_DIR" \
   --no-src-dir \
   --import-alias "@/*" \
   --yes
-
-cd "$PROJECT_DIR"
 
 # Write .mcp.json
 cat > .mcp.json << EOF
@@ -153,5 +133,5 @@ echo "  Project:  $(pwd)"
 echo "  Skills:   $installed installed"
 echo "  MCP:      configured"
 echo ""
-echo "Open $PROJECT_DIR/ in Claude Code, then run /hcl-setup."
+echo "Open this folder in Claude Code, then run /hcl-setup."
 echo ""
