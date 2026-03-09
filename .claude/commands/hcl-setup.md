@@ -18,6 +18,7 @@ HCL_SEARCH_CONTEXT=/search/resources
 HCL_CURRENCY=USD
 HCL_COMMERCE_VERSION=commerce-plus  # or commerce-9x
 HCL_FULFILLMENT_CENTER=             # Commerce+ only, e.g. R00B2C
+HCL_SEARCH_STORE_ID=               # search store ID, e.g. 12001
 NODE_TLS_REJECT_UNAUTHORIZED=0      # required for demo environments with self-signed certificates
 ```
 
@@ -155,4 +156,4 @@ Always use this helper — never construct image URLs inline.
 
 ## Confirm setup
 
-When done, tell the user what was created and confirm the MCP connection is working. The project is now ready for `/hcl-plp`, `/hcl-pdp`, `/hcl-cart`, and `/hcl-checkout`.
+When done, tell the user what was created and confirm the MCP connection is working. The next step is `/hcl-brief` to define the storefront before building any pages.

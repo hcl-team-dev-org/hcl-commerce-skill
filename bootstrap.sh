@@ -18,6 +18,7 @@ fi
 : "${HCL_CATALOG_ID:=3074457345616678718}"
 : "${HCL_CONTRACT_ID:=-41005}"
 : "${HCL_FULFILLMENT_CENTER:=R00B2C}"
+: "${HCL_SEARCH_STORE_ID:=12001}"
 : "${HCL_STORE_NAME:=Ruby}"
 : "${HCL_COMMERCE_VERSION:=commerce-9x}"
 : "${HCL_CURRENCY:=USD}"
@@ -47,6 +48,7 @@ prompt HCL_STORE_ID           "Store ID"
 prompt HCL_CATALOG_ID         "Catalog ID"
 prompt HCL_CONTRACT_ID        "Contract ID"
 prompt HCL_FULFILLMENT_CENTER "Fulfillment center"
+prompt HCL_SEARCH_STORE_ID    "Search store ID"
 prompt HCL_STORE_NAME         "Store name"
 prompt HCL_COMMERCE_VERSION   "Commerce version"
 prompt HCL_CURRENCY           "Currency"
@@ -88,6 +90,7 @@ HCL_STORE_NAME='$HCL_STORE_NAME'
 HCL_COMMERCE_VERSION='$HCL_COMMERCE_VERSION'
 HCL_CURRENCY='$HCL_CURRENCY'
 HCL_MCP_PATH='$HCL_MCP_PATH'
+HCL_SEARCH_STORE_ID='$HCL_SEARCH_STORE_ID'
 EOF
 
 # Scaffold Next.js project into current directory
@@ -119,9 +122,21 @@ cat > .mcp.json << EOF
         "HCL_CURRENCY": "$HCL_CURRENCY",
         "HCL_COMMERCE_VERSION": "$HCL_COMMERCE_VERSION",
         "HCL_STORE_NAME": "$HCL_STORE_NAME",
-        "HCL_FULFILLMENT_CENTER": "$HCL_FULFILLMENT_CENTER"
+        "HCL_FULFILLMENT_CENTER": "$HCL_FULFILLMENT_CENTER",
+        "HCL_SEARCH_STORE_ID": "$HCL_SEARCH_STORE_ID"
       }
     }
+  }
+}
+EOF
+
+# Write project-scoped Claude Code settings
+cat > .claude/settings.json << 'EOF'
+{
+  "permissions": {
+    "allow": [
+      "MCP(hcl-commerce:*)"
+    ]
   }
 }
 EOF

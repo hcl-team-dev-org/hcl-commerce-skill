@@ -2,7 +2,14 @@ Create a `STOREFRONT.md` brief for this demo project.
 
 If `$ARGUMENTS` is provided, treat it as the initial description of the prospect and what they sell — use it to seed the brief without asking for a description first.
 
-If `$ARGUMENTS` is empty, start by asking: *"Describe the prospect and what you're building for them — industry, what they sell, and any characteristics that define their brand."*
+If `$ARGUMENTS` is empty, ask the following questions together in a single message — do not ask them one at a time:
+
+1. **Who is the prospect?** Industry and what they sell (e.g. "outdoor apparel brand", "B2B industrial supplier").
+2. **Brand feel?** A few words — e.g. "premium and minimal", "technical and functional", "bold and energetic".
+3. **Any constraints?** e.g. small catalogue, single hero product, B2B pricing, no search needed. Leave blank if none.
+4. **UI preference?** Recommend Tailwind CSS + shadcn/ui — confirm or let them specify something else.
+
+Use the answers to seed the brief. Make opinionated assumptions for anything not covered rather than asking more questions.
 
 If `STOREFRONT.md` already exists, read it first, summarise what's there, and ask whether to update it or start fresh.
 
